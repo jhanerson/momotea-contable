@@ -1,0 +1,38 @@
+* {
+
+    font-style: italic;
+
+}
+
+.A-1 {
+
+    max-width: 60rem;
+}
+
+body{
+margin-left: 5%;
+margin-right: 5%;
+}
+.container {
+    max-width: 24%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.btn-borrar {
+    padding: 5px 10px;
+}
+
+.img-a-1 {
+
+
+    background-image: url('Data/img/A/A-1.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 20%;
+}
