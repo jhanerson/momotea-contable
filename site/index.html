@@ -56,9 +56,20 @@
                 </section>
                 <br>
                 <section>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            <!-- en le siguiente codigo el iva se añade solo sies selecionado ademas da la opcion de cambiar el porcentaje del iva -->
+                            IVA 19%
+                        </label>
+                    </div>
+                </section>
+                <br>
+                <section>
                     <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="button" class="btn btn-primary">Eliminar producto</button>
                 </section>
+                <br>
                 <footer>
                     <br>
                 </footer>
@@ -67,6 +78,7 @@
     </section>
 
     <section>
+
         <head>
             <h2>Tabla</h2>
         </head>
@@ -79,17 +91,23 @@
                         <th>Precio</th>
                         <th>Total</th>
                         <th>Fecha</th>
-                        <th>Suma de Totales</th>
                     </tr>
                 </thead>
                 <tbody id="ventasTableBody"></tbody>
                 <br>
+
+                <head>
+                    <h2>Sumar Totales</h2>
+                </head>
             </table>
         </main>
     </section>
 
     <section>
+
         <head>
+            <!-- la funcion de el siguiente codigo es sumar los totales que aparezcan en las tablas -->
+            <button type="button" class="btn btn-primary" onclick="exportarExcel()">Sumar los totales</button>
             <h2>Guardar Datos</h2>
         </head>
         <main>
