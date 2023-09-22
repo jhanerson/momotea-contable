@@ -4,122 +4,41 @@ window.onload = function () {
     $('body').removeClass('no-scroll')
 }
 
-// Esperar a que el DOM termine de cargar
-document.addEventListener("DOMContentLoaded", function () {
-    // Obtener el formulario de venta por su ID
-    var ventaForm = document.getElementById("ventaForm");
+// Variables para llevar un registro de la suma total
+let sumaTotal = 0;
 
-    // Agregar un evento de escucha para el evento de envío del formulario
-    ventaForm.addEventListener("submit", function (event) {
-        event.preventDefault(); // Evitar que el formulario se envíe
+// Agrega un evento de envío al formulario
+ventaForm.addEventListener('submit', function (event) {
+    event.preventDefault(); // Evita que se envíe el formulario
 
-        // Obtener los valores de los campos del formulario
-        var producto = document.getElementById("producto").value;
-        var cantidad = document.getElementById("cantidad").value;
-        var precio = document.getElementById("precio").value;
+    // Obtiene los valores de los campos de entrada
+    const producto = document.getElementById('producto').value;
+    const cantidad = parseFloat(document.getElementById('cantidad').value); // Convierte a número
+    const precio = parseFloat(document.getElementById('precio').value); // Convierte a número
 
-        // Calcular el total de la venta
-        var total = cantidad * precio;
+    // Calcula el total para esta fila
+    const total = cantidad * precio;
 
-        // Obtener la fecha actual
-        var fecha = new Date().toLocaleDateString();
+    // Actualiza la suma total
+    sumaTotal += total;
 
-        // Crear una nueva fila para la tabla de ventas
-        var fila = document.createElement("tr");
+    // Crea una nueva fila en la tabla con los valores ingresados y el total
+    const newRow = document.createElement('tr');
+    newRow.innerHTML = `
+    <td>${producto}</td>
+    <td>${cantidad}</td>
+    <td>${precio}</td>
+    <td>${total}</td>
+    <td>${new Date().toLocaleDateString()}</td>
+    <td>${sumaTotal}</td>`; // Muestra la suma total
 
-        // Crear celdas para cada dato de la venta
-        var celdaProducto = document.createElement("td");
-        celdaProducto.textContent = producto;
-        var celdaCantidad = document.createElement("td");
-        celdaCantidad.textContent = cantidad;
-        var celdaPrecio = document.createElement("td");
-        celdaPrecio.textContent = precio;
-        var celdaTotal = document.createElement("td");
-        celdaTotal.textContent = total;
-        var celdaFecha = document.createElement("td");
-        celdaFecha.textContent = fecha;
 
-        // Agregar las celdas a la fila
-        fila.appendChild(celdaProducto);
-        fila.appendChild(celdaCantidad);
-        fila.appendChild(celdaPrecio);
-        fila.appendChild(celdaTotal);
-        fila.appendChild(celdaFecha);
 
-        // Obtener la tabla de ventas por su clase
-        var tablaVentas = document.querySelector(".table");
+    // Agrega la nueva fila a la tabla
+    ventasTableBody.appendChild(newRow);
 
-        // Agregar la fila a la tabla
-        tablaVentas.appendChild(fila);
-
-        // Limpiar los campos del formulario
-        ventaForm.reset();
-    });
-
-    // Obtener el botón de "Eliminar producto" por su tipo
-    var eliminarProductoBtn = document.querySelector("button[type='button']");
-
-    // Agregar un evento de escucha para el evento de clic en el botón
-    eliminarProductoBtn.addEventListener("click", function () {
-        // Obtener la última fila de la tabla de ventas
-        var ultimaFila = document.querySelector(".table tr:last-child");
-
-        // Verificar si hay filas en la tabla
-        if (ultimaFila) {
-            // Eliminar la última fila de la tabla
-            ultimaFila.remove();
-        }
-    });
+    // Resetea los valores de los campos de entrada
+    document.getElementById('producto').value = '';
+    document.getElementById('cantidad').value = '';
+    document.getElementById('precio').value = '';
 });
-
-
-// Espera a que la página se cargue completamente
-window.addEventListener('load', function () {
-    // Obtiene el botón de exportar
-    var exportButton = document.getElementById('exportButton');
-
-    // Agrega un evento de clic al botón de exportar
-    exportButton.addEventListener('click', function () {
-        // Obtiene el elemento de la tabla
-        var table = document.querySelector('.table');
-
-        // Convierte la tabla a una imagen utilizando html2canvas
-        html2canvas(table).then(function (canvas) {
-            // Crea un elemento de enlace
-            var link = document.createElement('a');
-            link.download = 'tabla_ventas.png'; // Nombre del archivo de imagen descargado
-
-            // Convierte el lienzo a una URL de datos
-            link.href = canvas.toDataURL('image/png');
-
-            // Activa el clic en el enlace para iniciar la descarga
-            link.click();
-        });
-    });
-});
-
-
-// Función para guardar una venta
-function guardarVenta() {
-    // Aquí iría tu lógica para guardar la venta en la base de datos o hacer lo que necesites
-}
-
-// Función para exportar la tabla a Excel
-function exportarExcel() {
-    // Obtiene los datos de la tabla
-    const tabla = document.querySelector('.table');
-    const datos = tabla.outerHTML;
-
-    // Crea un libro de Excel
-    const wb = XLSX.utils.book_new();
-    const ws = XLSX.utils.table_to_sheet(tabla);
-
-    // Agrega la hoja al libro de Excel
-    XLSX.utils.book_append_sheet(wb, ws, 'Tabla de ventas');
-
-    // Guarda el libro de Excel como un archivo
-    XLSX.writeFile(wb, 'ventas.xlsx');
-}
-
-
-

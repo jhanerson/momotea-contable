@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
-    <title>Store</title>
+    <title>Contable</title>
 </head>
 
 <body class="no-scroll">
@@ -21,52 +21,92 @@
         </div>
     </div>
 
-        <div class="img-a-1">
-            <h2>Gastos</h2>
-        </div>
+    <section>
 
-        <form id="ventaForm">
-            <div class="form-group">
-                <label for="producto">Producto:</label>
-                <input type="text" class="form-control" id="producto" required>
+        <head>
+            <div class="img-a-1">
+                <h2>Contable</h2>
             </div>
-            <div class="form-group">
-                <label for="cantidad">Cantidad:</label>
-                <input type="number" class="form-control" id="cantidad" required>
-            </div>
-            <div class="form-group">
-                <label for="precio">Precio:</label>
-                <input type="number" class="form-control" id="precio" required>
-            </div>
-            <hr>
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <button type="button" class="btn btn-primary">Eliminar producto</button>
-            <hr>
-        </form>
+        </head>
+        <main>
+            <form id="ventaForm">
 
-        <h2>Tabla de Gastos</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio</th>
-                    <th>Total</th>
-                    <th>Fecha</th>
-                </tr>
-            </thead>
-            <tbody id="ventasTableBody"></tbody>
-        </table>
+                <head>
+                    <br>
+                </head>
+                <section>
+                    <div class="form-group">
+                        <label for="producto">Producto:</label>
+                        <input type="text" class="form-control" id="producto" required>
+                    </div>
+                </section>
+                <br>
+                <section>
+                    <div class="form-group">
+                        <label for="cantidad">Cantidad:</label>
+                        <input type="number" class="form-control" id="cantidad" required>
+                    </div>
+                </section>
+                <br>
+                <section>
+                    <div class="form-group">
+                        <label for="precio">Precio:</label>
+                        <input type="number" class="form-control" id="precio" required>
+                    </div>
+                </section>
+                <br>
+                <section>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-primary">Eliminar producto</button>
+                </section>
+                <footer>
+                    <br>
+                </footer>
+            </form>
+        </main>
+    </section>
 
-        <h2>Análisis de ventas diarias</h2>
-        <button id="exportButton" class="btn btn-primary">Exportar a imagen</button>
-        <button type="button" class="btn btn-primary" onclick="exportarExcel()">Exportar a
-            Excel</button>
-        <hr>
+    <section>
+        <head>
+            <h2>Tabla</h2>
+        </head>
+        <main>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Total</th>
+                        <th>Fecha</th>
+                        <th>Suma de Totales</th>
+                    </tr>
+                </thead>
+                <tbody id="ventasTableBody"></tbody>
+                <br>
+            </table>
+        </main>
+    </section>
 
-        <footer class="container d-grid gap-2">
-            <p>© SITE-2023 | <i class="bi bi-patch-check-fill"></i></p>
+    <section>
+        <head>
+            <h2>Guardar Datos</h2>
+        </head>
+        <main>
+            <button id="exportButton" class="btn btn-primary">Exportar a imagen</button>
+            <button type="button" class="btn btn-primary" onclick="exportarExcel()">Exportar a
+                Excel</button>
+        </main>
+        <footer>
+            <br>
         </footer>
+    </section>
+
+
+    <br>
+    <footer class="text-center">
+        <p>© Contable-2023 <i class="bi bi-patch-check-fill"></i></p>
+    </footer>
 
 
     <script src="code.js"></script>
