@@ -4,81 +4,94 @@ window.onload = function () {
     $('body').removeClass('no-scroll')
 }
 
-// Espera a que el documento HTML esté completamente cargado
-document.addEventListener("DOMContentLoaded", function () {
-    // Obtén referencias a los elementos del formulario
-    const ventaForm = document.getElementById("ventaForm");
-    const productoInput = document.getElementById("producto");
-    const cantidadInput = document.getElementById("cantidad");
-    const precioInput = document.getElementById("precio");
-    const ivaCheckbox = document.getElementById("flexCheckDefault");
-    const ventasTableBody = document.getElementById("ventasTableBody");
+// Función para registrar una venta
+function registrarVenta(event) {
+    event.preventDefault(); // Evita que el formulario se envíe
 
-    // Array para almacenar las ventas
-    const ventas = [];
+    // Obtener los valores de los campos del formulario
+    const producto = document.getElementById('producto').value;
+    const cantidad = parseFloat(document.getElementById('cantidad').value);
+    const precio = parseFloat(document.getElementById('precio').value);
+    const ivaCheckbox = document.getElementById('flexCheckDefault');
+    const iva = ivaCheckbox.checked ? 0.19 : 0; // Si el checkbox está marcado, aplicar IVA
 
-    // Función para calcular el total de la venta
-    function calcularTotal(precio, cantidad) {
-        const subtotal = precio * cantidad;
-        const ivaPorcentaje = ivaCheckbox.checked ? 0.19 : 0;
-        const iva = subtotal * ivaPorcentaje;
-        const total = subtotal + iva;
-        return total.toFixed(2); // Redondear a 2 decimales
-    }
+    // Calcular el total
+    const total = cantidad * precio * (1 + iva);
 
-    // Función para agregar una venta a la tabla
-    function agregarVenta(producto, cantidad, precio, total) {
-        const fecha = new Date().toLocaleDateString();
-        const newRow = document.createElement("tr");
-        newRow.innerHTML = `
-            <td>${producto}</td>
-            <td>${cantidad}</td>
-            <td>${precio}</td>
-            <td>${total}</td>
-            <td>${fecha}</td>
-        `;
-        ventasTableBody.appendChild(newRow);
-    }
+    // Obtener la fecha actual
+    const fecha = new Date().toLocaleDateString();
 
-    // Manejador de evento para el envío del formulario
-    ventaForm.addEventListener("submit", function (e) {
-        e.preventDefault(); // Evita la recarga de la página
+    // Crear una nueva fila para la tabla de ventas
+    const newRow = document.createElement('tr');
+    newRow.innerHTML = `
+        <td>${producto}</td>
+        <td>${cantidad}</td>
+        <td>${precio}</td>
+        <td>${total.toFixed(2)}</td>
+        <td>${fecha}</td>
+    `;
 
-        // Obtén los valores ingresados por el usuario
-        const producto = productoInput.value;
-        const cantidad = parseFloat(cantidadInput.value);
-        const precio = parseFloat(precioInput.value);
+    // Agregar la nueva fila a la tabla de ventas
+    const ventasTableBody = document.getElementById('ventasTableBody');
+    ventasTableBody.appendChild(newRow);
 
-        // Validación básica
-        if (isNaN(cantidad) || isNaN(precio) || producto.trim() === "") {
-            alert("Por favor, complete todos los campos correctamente.");
-            return;
-        }
+    // Actualizar el gran total
+    actualizarGranTotal(total);
 
-        // Calcula el total de la venta
-        const totalVenta = calcularTotal(precio, cantidad);
+    // Limpiar los campos del formulario
+    document.getElementById('producto').value = '';
+    document.getElementById('cantidad').value = '';
+    document.getElementById('precio').value = '';
+    ivaCheckbox.checked = false;
+}
 
-        // Agrega la venta al array
-        ventas.push({
-            producto,
-            cantidad,
-            precio,
-            total: totalVenta,
+// Función para eliminar un producto de la tabla de ventas
+function eliminarProducto() {
+    // Implementa la lógica para eliminar un producto de la tabla aquí
+}
+
+// Función para actualizar el gran total
+function actualizarGranTotal(nuevaVentaTotal) {
+    const granTotalInput = document.getElementById('Gran');
+    const granTotalAnterior = parseFloat(granTotalInput.value);
+    const nuevoGranTotal = granTotalAnterior + nuevaVentaTotal;
+    granTotalInput.value = nuevoGranTotal.toFixed(2);
+}
+
+// Función para exportar a Excel
+function exportarExcel() {
+    // Implementa la lógica para exportar a Excel aquí
+}
+
+// Agregar un evento 'submit' al formulario para registrar ventas
+const ventaForm = document.getElementById('ventaForm');
+ventaForm.addEventListener('submit', registrarVenta);
+
+
+    // Función para calcular y mostrar el gran total
+    function calcularGranTotal() {
+        var filas = document.querySelectorAll("#ventasTableBody tr");
+        var granTotal = 0;
+
+        filas.forEach(function (fila) {
+            var cantidad = parseFloat(fila.querySelector("td:nth-child(2)").textContent);
+            var precio = parseFloat(fila.querySelector("td:nth-child(3)").textContent);
+            var total = cantidad * precio;
+
+            granTotal += total;
         });
 
-        // Agrega la venta a la tabla
-        agregarVenta(producto, cantidad, precio, totalVenta);
+        // Verifica si se debe agregar el IVA (19%)
+        var ivaCheckbox = document.getElementById("flexCheckDefault");
+        if (ivaCheckbox.checked) {
+            granTotal *= 1.19; // Aplicar el 19% de IVA
+        }
 
-        // Limpia los campos del formulario
-        productoInput.value = "";
-        cantidadInput.value = "";
-        precioInput.value = "";
+        // Actualiza el campo de entrada con el gran total
+        var granTotalInput = document.getElementById("Gran");
+        granTotalInput.value = granTotal.toFixed(2); // Redondea a 2 decimales
+    }
 
-        // Muestra un mensaje de confirmación
-        alert("Venta registrada con éxito.");
-    });
-});
-
-
-
+    // Llama a la función cuando la página se carga y cada vez que se agrega una nueva venta
+    document.addEventListener("DOMContentLoaded", calcularGranTotal);
 

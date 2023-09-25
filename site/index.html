@@ -1,6 +1,3 @@
-<link rel="stylesheet" href="bootstrap.min.css">
-<link rel="stylesheet" href="bootstrap-icons.css">
-<link rel="stylesheet" href="style.css">
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,125 +10,81 @@
     <title>Contable</title>
 </head>
 
-<body class="no-scroll">
-    <div class="centrado" id="onload">
-        <div class="lds-ripple">
-            <div></div>
-            <div></div>
-        </div>
-    </div>
-
+<body class="bg-light">
     <section>
 
         <head>
-            <div class="img-a-1">
-                <h2>Contable</h2>
+            <div class="container mt-5">
+                <div class="text-center">
+                    <h1 class="mb-4">Contable</h1>
+                </div>
             </div>
         </head>
         <main>
-            <form id="ventaForm">
-
-                <head>
-                    <br>
-                </head>
-                <section>
-                    <div class="form-group">
-                        <label for="producto">Producto:</label>
-                        <input type="text" class="form-control" id="producto" required>
+            <div class="row">
+                <div class="col-md-6">
+                    <form id="ventaForm">
+                        <h2>Registrar Venta</h2>
+                        <div class="mb-3">
+                            <label for="producto" class="form-label">Producto:</label>
+                            <input type="text" class="form-control" id="producto" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cantidad" class="form-label">Cantidad:</label>
+                            <input type="number" class="form-control" id="cantidad" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="precio" class="form-label">Precio:</label>
+                            <input type="number" class="form-control" id="precio" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">IVA 19%</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="button" class="btn btn-danger" onclick="eliminarProducto()">Eliminar
+                            producto</button>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <h2>Tabla de Ventas</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                                <th>Total</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ventasTableBody"></tbody>
+                    </table>
+                    <div class="mb-3">
+                        <label for="precio" class="form-label">Gran Total:</label>
+                        <input type="text" class="form-control" id="Gran" required>
                     </div>
-                </section>
-                <br>
-                <section>
-                    <div class="form-group">
-                        <label for="cantidad">Cantidad:</label>
-                        <input type="number" class="form-control" id="cantidad" required>
-                    </div>
-                </section>
-                <br>
-                <section>
-                    <div class="form-group">
-                        <label for="precio">Precio:</label>
-                        <input type="number" class="form-control" id="precio" required>
-                    </div>
-                </section>
-                <br>
-                <section>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            <!-- en le siguiente codigo el iva se añade solo sies selecionado ademas da la opcion de cambiar el porcentaje del iva -->
-                            IVA 19%
-                        </label>
-                    </div>
-                </section>
-                <br>
-                <section>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="button" class="btn btn-primary">Eliminar producto</button>
-                </section>
-                <br>
-                <footer>
-                    <br>
-                </footer>
-            </form>
-        </main>
-    </section>
-
-    <section>
-
-        <head>
-            <h2>Tabla</h2>
-        </head>
-        <main>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Cantidad</th>
-                        <th>Precio</th>
-                        <th>Total</th>
-                        <th>Fecha</th>
-                    </tr>
-                </thead>
-                <tbody id="ventasTableBody"></tbody>
-                <br>
-
-                <head>
-                    <h2>Sumar Totales</h2>
-                </head>
-            </table>
-        </main>
-    </section>
-
-    <section>
-
-        <head>
-            <!-- la funcion de el siguiente codigo es sumar los totales que aparezcan en las tablas -->
-            <button type="button" class="btn btn-primary" onclick="exportarExcel()">Sumar los totales</button>
-            <h2>Guardar Datos</h2>
-        </head>
-        <main>
-            <button id="exportButton" class="btn btn-primary">Exportar a imagen</button>
-            <button type="button" class="btn btn-primary" onclick="exportarExcel()">Exportar a
-                Excel</button>
+                </div>
+            </div>
         </main>
         <footer>
-            <br>
+            <div class="text-center mt-4">
+                <button id="exportButton" class="btn btn-primary">Imagen</button>
+                <button type="button" class="btn btn-success" onclick="exportarExcel()">Excel</button>
+            </div>
         </footer>
     </section>
 
 
-    <br>
-    <footer class="text-center">
+    <footer class="text-center mt-5">
         <p>© Contable-2023 <i class="bi bi-patch-check-fill"></i></p>
     </footer>
 
-
-    <script src="code.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.3.2/dist/html2canvas.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="code.js"></script>
 </body>
 
 </html>
