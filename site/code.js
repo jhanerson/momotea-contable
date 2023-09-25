@@ -5,6 +5,8 @@ window.onload = function () {
 }
 
 
+// Esta variable se utiliza para mantener un registro de los productos en la tabla.
+let productos = [];
 
 // Función para calcular el Gran Total
 function calcularGranTotal() {
@@ -30,6 +32,10 @@ function agregarVenta(producto, cantidad, precio, total, fecha) {
         <td>${precio}</td>
         <td>${total}</td>
         <td>${fecha}</td>
+        <td>
+            <button class="btn btn-warning btn-sm" onclick="modificarProducto(this)">Modificar</button>
+            <button class="btn btn-danger btn-sm" onclick="eliminarProducto(this)">Borrar</button>
+        </td>
     `;
 
     // Llama a la función para recalcular el Gran Total
@@ -37,8 +43,33 @@ function agregarVenta(producto, cantidad, precio, total, fecha) {
 }
 
 // Función para eliminar un producto de la tabla
-function eliminarProducto() {
-    // Implementa la lógica para eliminar un producto de la tabla aquí
+function eliminarProducto(button) {
+    const row = button.closest('tr');
+    row.remove();
+
+    // Llama a la función para recalcular el Gran Total
+    calcularGranTotal();
+}
+
+// Función para modificar un producto de la tabla
+function modificarProducto(button) {
+    const row = button.closest('tr');
+    const cells = row.cells;
+
+    // Obtener los valores actuales de la fila
+    const producto = cells[0].textContent;
+    const cantidad = parseInt(cells[1].textContent);
+    const precio = parseFloat(cells[2].textContent);
+    const total = parseFloat(cells[3].textContent);
+
+    // Rellenar el formulario de registro con los datos del producto seleccionado
+    document.getElementById('producto').value = producto;
+    document.getElementById('cantidad').value = cantidad;
+    document.getElementById('precio').value = precio;
+    document.getElementById('flexCheckDefault').checked = total !== (precio * cantidad);
+
+    // Elimina la fila actual
+    eliminarProducto(button);
 }
 
 // Función para exportar la tabla como imagen PNG
@@ -89,5 +120,5 @@ document.querySelector('button.btn-success').addEventListener('click', function 
     exportarExcel();
 });
 
-// Llama a la función para calcular el Gran Total cuando la página se carga
+// Llamar a la función para calcular el Gran Total cuando la página se carga
 document.addEventListener("DOMContentLoaded", calcularGranTotal);
