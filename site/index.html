@@ -10,8 +10,8 @@
     <title>Contable</title>
 </head>
 
-<body class="bg-light">
-    <section>
+<body class="bg-light ">
+    <section class="">
 
         <head>
             <div class="container mt-5">
@@ -20,6 +20,28 @@
                 </div>
             </div>
         </head>
+        <section>
+
+            <head>
+                <br>
+            </head>
+            <main>
+                <p class="d-inline-flex gap-1">
+                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Productos
+                    </a>
+                </p>
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                        <img src="Data/img/A/A-2.jpg" style="max-width: 18rem;">
+                    </div>
+                </div>
+            </main>
+            <footer>
+                <br>
+            </footer>
+        </section>
         <main>
             <div class="row">
                 <div class="col-md-6">
@@ -46,7 +68,7 @@
                             producto</button>
                     </form>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <h2>Tabla de Ventas</h2>
                     <table class="table">
                         <thead>
@@ -56,11 +78,11 @@
                                 <th>Precio</th>
                                 <th>Total</th>
                                 <th>Fecha</th>
-                                <th>
-                                    <label for="precio" class="form-label">Gran Total:</label>
-                                    <input type="text" class="form-control" id="Gran" >
-                                </th>
                             </tr>
+                            <th class="gran-total ">
+                                <label for="precio" class="form-label">Gran Total:</label>
+                                <input type="text" class="form-control" id="Gran">
+                            </th>
                         </thead>
                         <tbody id="ventasTableBody"></tbody>
                     </table>

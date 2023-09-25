@@ -3,6 +3,9 @@ window.onload = function () {
     $('#onload').fadeOut();
     $('body').removeClass('no-scroll')
 }
+
+
+
 // Función para calcular el Gran Total
 function calcularGranTotal() {
     const rows = document.querySelectorAll('#ventasTableBody tr');
