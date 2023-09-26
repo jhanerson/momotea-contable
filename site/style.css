@@ -4,6 +4,19 @@
 
 }
 
+body {
+
+background-color: black;
+color: white;
+}
+
+.site {
+
+    background-color: rgb(255, 0, 0);
+    color: white;
+    }
+    
+
 .form-control {
     display: block;
     width: auto; 

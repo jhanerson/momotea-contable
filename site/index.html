@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="bg-light">
+<body>
 
     <header class="text-center mt-5">
         <div class="container">
@@ -34,7 +34,7 @@
         </section>
 
         <section>
-            <h2>Registrar Venta</h2>
+            <h2>Registrar</h2>
             <form id="ventaForm">
                 <div class="mb-3">
                     <label for="producto" class="form-label">Producto:</label>
@@ -56,27 +56,28 @@
             </form>
         </section>
 
-<!-- Dentro de la sección "Tabla de Ventas" -->
-<section>
-    <h2>Tabla de Ventas</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-                <th>Total</th>
-                <th>Fecha</th>
-                <th style="background-color: rgb(197, 196, 255);" class="rounded">
-                    <label for="precio">Gran Total:</label>
-                    <input class="form-control me-2" type="search" id="Gran" class="rounded" style="color: rgb(0, 0, 0);">
-                </th>
-                <th>Acciones</th> <!-- Agregar una columna para las acciones -->
-            </tr>
-        </thead>
-        <tbody id="ventasTableBody"></tbody>
-    </table>
-</section>
+        <!-- Dentro de la sección "Tabla de Ventas" -->
+        <section>
+            <h2>Tabla</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="background-color:black; color: white;">
+                            Producto</th>
+                        <th style="background-color:black; color: white;"class="site">Cantidad</th>
+                        <th style="background-color:black; color: white;"class="th">Precio</th>
+                        <th style="background-color:black; color: white;"class="th">Total</th>
+                        <th style="background-color:black; color: white;"class="th">Fecha</th>
+                        <th style="background-color:black; color: white;"style="background-color: rgb(197, 196, 255);" class="rounded">
+                            <label for="precio" style="background-color:black; color: white;">Gran Total:</label>
+                            <input class="form-control me-2" type="search" id="Gran" class="rounded"
+                                style="color: rgb(0, 0, 0);">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="ventasTableBody"></tbody>
+            </table>
+        </section>
 
 
         <section>
@@ -86,6 +87,10 @@
             </div>
         </section>
     </main>
+
+
+    <br><br><br>
+
 
     <footer class="text-center mt-5">
         <p>© Contable-2023 <i class="bi bi-patch-check-fill"></i></p>

@@ -35,8 +35,7 @@ function agregarVenta(producto, cantidad, precio, total, fecha) {
         <td>
             <button class="btn btn-warning btn-sm" onclick="modificarProducto(this)">Modificar</button>
             <button class="btn btn-danger btn-sm" onclick="eliminarProducto(this)">Borrar</button>
-        </td>
-    `;
+        </td>`;
 
     // Llama a la función para recalcular el Gran Total
     calcularGranTotal();
